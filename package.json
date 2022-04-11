@@ -1,0 +1,25 @@
+{
+    "name": "jsl",
+    "displayName": "JSL",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.66.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "jsl",
+            "aliases": ["JUDO Specification Language", "jsl"],
+            "extensions": [".jsl"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "jsl",
+            "scopeName": "source.jsl",
+            "path": "./syntaxes/jsl.tmLanguage.json"
+        }]
+    }
+}

@@ -1,25 +1,26 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"scopeName": "source.jsl",
 	"name": "JUDO Specification Language",
+
 	"patterns": [
 		{
 			"include": "#comments"
 		},
-		{
-			"include": "#punctuation"
-		},
-		{
-			"include": "#annotations"
-		},
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#constants-and-special-vars"
-		},
-		{
-			"include": "#strings"
-		}
+		{ "name": "keyword.control.jsl.commands", "match": "\\b(var|construct|destruct|save|load|if|else|for|in|while|validate|unset|delete|return|break|continue|new|implies|or|xor|and|div|mod|not|throw|try|catch|self)\\b"},
+		{ "name": "storage.type.jsl.types", "match": "\\b(actor|username|principal|boolean|binary|string|numeric|date|time|timestamp|mapped|as|abstract|extends|model|import|annotate|diagram|entity|transfer|type|union|error|enum)\\b"},
+		{ "name": "keyword.control.jsl.features", "match": "\\b(authorize|stage|table|column|layout|constraint|field|identifier|derived|relation|action|static|throws|group|package|widget)\\b"},
+		{ "name": "keyword.control.jsl.parameters", "match": "\\b(void|override|onerror|class|horizontal|vertical|hide\\-attributes|hide\\-actions|hide-relations|expression|opposite|opposite\\-add|read\\-only|max\\-length|mime\\-types|max\\-file\\-size|regex|precision|required|cascade|scale|frame|label|icon|stretch\\-horizontal|stretch\\-vertical|stretch\\-both|width|height)\\b"},
+		{ "name": "string.quoted.double.states", "begin": "\"", "end": "\""},
+		{ "name": "keyword.operator.comparison.jsl", "match": "<\\=|>\\=|\\=\\=|<|>|<>"},
+		{ "name": "keyword.operator.assignment.jsl", "match": "\\=|\\+\\=|-\\=|\\*\\=|/\\=|//\\=|%\\=|&\\=|\\|\\=|\\^\\=|>>\\=|<<\\=|\\*\\*\\="},
+		{ "name": "keyword.operator.arithmetic.jsl", "match": "\\+|\\-|\\*|\\*\\*|/|//|%|<<|>>|&|\\||\\^|~"},
+		{ "name": "constant.numeric.octal.jsl", "match": "\b(?i:(0[0-7]+)L?)"},
+		{ "name": "constant.numeric.float.jsl", "match": "\b(?i:(\\d+\\.\\d*(e[\\-\\+]?\\d+)?))(?=[^a-zA-Z_])"},
+		{ "name": "constant.numeric.float.jsl", "match": "(?<=[^0-9a-zA-Z_])(?i:(\\.\\d+(e[\\-\\+]?\\d+)?))" },
+		{ "name": "constant.numeric.float.jsl", "match": "\b(?i:(\\d+e[\\-\\+]?\\d+))"},
+		{ "name": "constant.numeric.integer.long.decimal.jsl", "match": "\\b(?i:([1-9]+[0-9]*|0)L)"},
+		{ "name": "constant.numeric.integer.decimal.jsl", "match": "\\b([1-9]+[0-9]*|0)"}
 	],
 	"repository": {
 		"comments": {
@@ -27,6 +28,7 @@
 				{
 					"name": "comment.block.empty.jsl",
 					"match": "/\\*\\*/",
+					"comment": "punctuation.definition.comment define the scope in editor.textColorCustomization",
 					"captures": {
 						"0": {
 							"name": "punctuation.definition.comment.jsl"
@@ -34,47 +36,7 @@
 					}
 				},
 				{
-					"include": "#comments-doc-oldschool"
-				},
-				{
-					"include": "#comments-doc"
-				},
-				{
 					"include": "#comments-inline"
-				}
-			]
-		},
-		"comments-doc-oldschool": {
-			"patterns": [
-				{
-					"name": "comment.block.documentation.jsl",
-					"begin": "/\\*\\*",
-					"end": "\\*/",
-					"patterns": [
-						{
-							"include": "#comments-doc-oldschool"
-						},
-						{
-							"include": "#comments-block"
-						},
-						{
-							"include": "#jsldoc"
-						}
-					]
-				}
-			]
-		},
-		"comments-doc": {
-			"patterns": [
-				{
-					"name": "comment.block.documentation.jsl",
-					"begin": "///",
-					"while": "^\\s*///",
-					"patterns": [
-						{
-							"include": "#jsldoc"
-						}
-					]
 				}
 			]
 		},
@@ -106,117 +68,7 @@
 					]
 				}
 			]
-		},
-		"constants-and-special-vars": {
-			"patterns": [
-				{
-					"name": "constant.language.dart",
-					"match": "(true|false|undefined)"
-				},
-				{
-					"name": "variable.language.dart",
-					"match": "(self)"
-				},
-				{
-					"name": "constant.numeric.dart",
-					"match": "((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)"
-				},
-				{
-					"name": "constant.other.jsl",
-					"match": "(RULE_NL|RULE_INTEGER|RULE_DECIMAL|RULE_DIGIT|RULE_STRING|RULE_RAW_STRING|RULE_MIME_TYPE|RULE_DATE)"
-				},
-				{
-					"include": "#class-identifier"
-				},
-				{
-					"include": "#function-identifier"
-				}
-
-			]
-		},
-		"keywords": {
-			"patterns": [
-				{
-					"name": "keyword.cast.jsl",
-					"match": "as"
-				},
-				{
-					"name": "keyword.control.catch-exception.jsl",
-					"match": "(try|on|catch|finally|throw|rethrow)"
-				},
-				{
-					"name": "keyword.control.jsl",
-					"match": "(break|case|continue|default|do|else|for|if|in|return|switch|while)"
-				},
-				{
-					"name": "keyword.control.new.jsl",
-					"match": "(new)"
-				},
-				{
-					"name": "keyword.declaration.jsl",
-					"match": "(abstract|model|enum|extends|error|implies|field)"
-				},
-				{
-					"name": "keyword.operator.ternary.jsl",
-					"match": "\\?|:"
-				},
-				{
-					"name": "keyword.operator.bitwise.jsl",
-					"match": "(<<|>>>?|~|\\^|\\||&)"
-				},
-				{
-					"name": "keyword.operator.assignment.bitwise.jsl",
-					"match": "((&|\\^|\\||<<|>>>?)=)"
-				},
-				{
-					"name": "keyword.operator.closure.jsl",
-					"match": "(=>)"
-				},
-				{
-					"name": "keyword.operator.comparison.jsl",
-					"match": "(==|!=|<=?|>=?)"
-				},
-				{
-					"name": "keyword.operator.assignment.arithmetic.jsl",
-					"match": "(\\+=|\\-=)"
-				},
-				{
-					"name": "keyword.operator.assignment.jsl",
-					"match": "(=)"
-				},
-				{
-					"name": "keyword.operator.increment-decrement.jsl",
-					"match": "(\\-\\-|\\+\\+)"
-				},
-				{
-					"name": "keyword.operator.arithmetic.jsl",
-					"match": "(\\-|\\+|\\*|\\/|)"
-				},
-				{
-					"name": "keyword.operator.logical.jsl",
-					"match": "(not|and|or|xor)"
-				},
-				{
-					"name": "storage.modifier.jsl",
-					"match": "(static|final|const|required|late)"
-				},
-				{
-					"name": "storage.type.primitive.jsl",
-					"match": "(var|relation|type|actor|username|principal|boolean|binary|string|numeric|date|time|timestamp)"
-				}
-			]
-		},
-		"strings": {
-			"name": "string.quoted.double.jsl",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape.jsl",
-					"match": "\\\\."
-				}
-			]
 		}
-	},
-	"scopeName": "source.jsl"
+	}
 }
+

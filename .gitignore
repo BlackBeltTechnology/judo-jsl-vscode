@@ -5,4 +5,4 @@ node
 out/**
 target/**
 .flattened-pom.xml
-.vscode
+.vscode/settings.json

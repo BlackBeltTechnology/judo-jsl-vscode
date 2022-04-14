@@ -1,0 +1,16 @@
+JUDO Specific Language VSCode plgugin
+=====================================
+
+The JSL VSCode plugin provides smart editing features for JUDO Specific Language aka JSL. 
+
+
+Compiling
+---------
+
+To compile module maven 3.3.6 is required, because the code server written in Java and have to be downloaded from maven. The maven itself contains frontend plugin, means the frontend build itself is also called in maven build.
+To run server download and npm install type
+
+----
+mvn clean install
+----
+

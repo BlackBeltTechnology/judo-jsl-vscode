@@ -1,0 +1,470 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>hu.blackbelt.judo</groupId>
+    <artifactId>judo-jsl-vscode</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <name>JUDO JSL VSCode extension</name>
+    <description>JUDO Specification Language VSCode Extension.</description>
+
+    <developers>
+        <developer>
+            <id>robson</id>
+            <name>Csákány Róbert</name>
+            <email>robert.csakany@blackbelt.hu</email>
+            <url>https://github.com/robertcsakany</url>
+            <organization>BlackBelt Technology</organization>
+            <organizationUrl>https://www.blackbelt.hu</organizationUrl>
+        </developer>
+
+        <developer>
+            <id>rolandknobloch</id>
+            <name>Roland Knobloch</name>
+            <email>roland.knobloch@blackbelt.hu</email>
+            <url>https://github.com/rolandknobloch/</url>
+            <organization>BlackBelt Technology</organization>
+            <organizationUrl>https://www.blackbelt.hu</organizationUrl>
+        </developer>
+    </developers>
+
+    <properties>
+        <revision>1.0.0-SNAPSHOT</revision>
+        <maven>3.8.3</maven>
+
+        <project-shortname>judo-jsl-vscode</project-shortname>
+        <project-repositoryId>BlackBeltTechnology/judo-jsl-vscode</project-repositoryId>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+        <src.dir>src/main</src.dir>
+
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+
+        <!-- Model versions -->
+        <judo-meta-jsl-version>1.0.0.20220413_145138_b518f552_develop</judo-meta-jsl-version>
+
+    </properties>
+
+    <url>http://github.com/${project-repositoryId}</url>
+
+    <issueManagement>
+        <url>https://github.com/${project-repositoryId}/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:git@github.com:${project-repositoryId}.git</connection>
+        <!--suppress UnresolvedMavenProperty -->
+        <developerConnection>scm:git:ssh://${git.username}@github.com:${project-repositoryId}.git
+        </developerConnection>
+        <url>http://github.com/${project-repositoryId}</url>
+    </scm>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>hu.blackbelt.judo.meta</groupId>
+                <artifactId>hu.blackbelt.judo.meta.jsl.server.embedded</artifactId>
+                <version>${judo-meta-jsl-version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M5</version>
+                    <configuration>
+                        <argLine>-Dfile.encoding=UTF-8</argLine>
+                        <trimStackTrace>false</trimStackTrace>
+                        <systemPropertyVariables>
+                            <log4j.configuration>${log4j.configuration}</log4j.configuration>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>hu.blackbelt</groupId>
+                                        <artifactId>
+                                            unpack-artifact-maven-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [1.0.0,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>unpack</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                			org.codehaus.mojo
+                                        </groupId>
+                                        <artifactId>
+                                			flatten-maven-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                			[1.1.0,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>flatten</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                			org.apache.maven.plugins
+                                        </groupId>
+                                        <artifactId>
+                                			maven-help-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                			[3.2.0,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>active-profiles</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <version>1.12.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>modules</id>
+            <activation>
+                <property>
+                    <name>skipModules</name>
+                    <value>!true</value>
+                </property>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.3.0</version>
+                        <executions>
+                            <execution>
+                                <id>copy</id>
+                                <phase>process-sources</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>hu.blackbelt.judo.meta</groupId>
+                                    <artifactId>hu.blackbelt.judo.meta.jsl.server.embedded</artifactId>
+                                    <type>jar</type>
+                                    <classifier>ls</classifier>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.basedir}/src/jsl/lib</outputDirectory>
+                                    <destFileName>jsl-ls.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>${project.build.directory}/wars</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <!-- optional: you don't really need execution ids, but it looks nice in your build log. -->
+                                <id>install node and npm</id>
+                                <goals>
+                                    <goal>install-node-and-npm</goal>
+                                </goals>
+                                <!-- optional: default phase is "generate-resources" -->
+                                <phase>generate-resources</phase>
+                            </execution>
+
+                            <execution>
+                                <id>execute npm install</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>install</arguments>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>execute vsce package</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>run vsce package -- --out ./jsl-language.vsix</arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+
+                        <configuration>
+                            <nodeVersion>v16.14.2</nodeVersion>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
+
+        <profile>
+            <id>generate-checksum</id>
+            <activation>
+                <property>
+                    <name>ignore_checksum</name>
+                    <value>!true</value>
+                </property>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>net.nicoulaj.maven.plugins</groupId>
+                        <artifactId>checksum-maven-plugin</artifactId>
+                        <version>1.10</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>artifacts</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <csvSummary>true</csvSummary>
+                            <csvSummaryFile>artifacts-checksums.csv</csvSummaryFile>
+                            <xmlSummary>true</xmlSummary>
+                            <xmlSummaryFile>artifacts-checksums.xml</xmlSummaryFile>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-checksum-artifacts</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>${basedir}/target/artifacts-checksums.csv</file>
+                                            <type>csv</type>
+                                            <classifier>checksum</classifier>
+                                        </artifact>
+                                        <artifact>
+                                            <file>${basedir}/target/artifacts-checksums.xml</file>
+                                            <type>xml</type>
+                                            <classifier>checksum</classifier>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>sign-artifacts</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <keyname>${gpg.keyname}</keyname>
+                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                                    <!-- This is necessary for gpg to not try to use the pinentry programs -->
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>release-dummy</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>dummy-distribution</id>
+                    <url>file:///tmp/${project.groupId}-${project.artifactId}-${project.version}/maven-snapshot/</url>
+                </snapshotRepository>
+                <repository>
+                    <id>dummy-distribution</id>
+                    <url>file:///tmp/${project.groupId}-${project.artifactId}-${project.version}/maven-release/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+
+        <profile>
+            <id>release-judong</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>judong-nexus-distribution</id>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <url>https://nexus.judo.technology/repository/maven-judong-snapshots/</url>
+                </snapshotRepository>
+                <repository>
+                    <id>judong-nexus-distribution</id>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <url>https://nexus.judo.technology/repository/maven-judong-snapshots/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+
+        <profile>
+            <id>release-central</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+</project>

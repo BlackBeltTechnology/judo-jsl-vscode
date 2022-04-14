@@ -1,14 +1,27 @@
 {
-    "name": "jsl",
-    "displayName": "JSL",
-    "description": "",
-    "version": "0.0.1",
+    "name": "judo-jsl-extension",
+    "displayName": "JUDO JSL",
+    "description": "JUDO Specification Language Extension (JSL)",
+    "version": "1.0.0",
+    "publisher": "BlackBelt Technology",
+    "icon": "images/judo-logo.png",
     "engines": {
-        "vscode": "^1.66.0"
+        "vscode": "^1.64.0"
     },
     "categories": [
         "Programming Languages"
     ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/BlackBeltTechnology/judo-meta-jsl.git"
+    },
+    "bugs": {
+        "url": "https://github.com/BlackBeltTechnology/judo-meta-jsl/issues"
+    },
+    "activationEvents": [
+        "onLanguage:jsl"
+    ],
+    "main": "out/extension",
     "contributes": {
         "languages": [{
             "id": "jsl",
@@ -21,5 +34,23 @@
             "scopeName": "source.jsl",
             "path": "./syntaxes/jsl.tmLanguage.json"
         }]
+    },
+
+    "devDependencies": {
+        "@types/node": "^17.0.18",
+        "@types/vscode": "^1.64.0",
+        "typescript": "^4.5.5",
+        "vscode-test": "^1.5.2"
+    },
+    "dependencies": {
+        "vsce": "^2.7.0",
+        "vscode-languageclient": "^7.0.0"
+    },
+    "scripts": {
+        "prepublish": "tsc -p ./src",
+        "compile": "tsc -p ./src",
+        "watch": "tsc -w -p ./src",
+        "update-vscode": "node ./node_modules/vscode/bin/install",
+        "vsce": "vsce"
     }
 }

@@ -1,2 +1,8 @@
+src/jsl/lib/*.jar
 node_modules
+node
 *.vsix
+out/**
+target/**
+.flattened-pom.xml
+.vscode

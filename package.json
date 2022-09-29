@@ -1,25 +1,66 @@
 {
-    "name": "jsl",
-    "displayName": "JSL",
-    "description": "",
-    "version": "0.0.1",
+    "name": "judo-jsl-extension",
+    "displayName": "JUDO JSL",
+    "description": "JUDO Specification Language Extension (JSL)",
+    "version": "1.0.0",
+    "publisher": "BlackBelt Technology",
+    "icon": "images/judo-logo.png",
+    "license": "EPL-1.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/BlackBeltTechnology/judo-jsl-vscode.git"
+    },
+    "bugs": {
+        "url": "https://github.com/BlackBeltTechnology/judo-jsl-vscode/issues"
+    },
     "engines": {
-        "vscode": "^1.66.0"
+        "vscode": "^1.67.1"
     },
     "categories": [
         "Programming Languages"
     ],
+    "activationEvents": [
+        "onLanguage:jsl"
+    ],
+    "main": "out/extension",
     "contributes": {
-        "languages": [{
-            "id": "jsl",
-            "aliases": ["JUDO Specification Language", "jsl"],
-            "extensions": [".jsl"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "jsl",
-            "scopeName": "source.jsl",
-            "path": "./syntaxes/jsl.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "jsl",
+                "aliases": [
+                    "JUDO Specification Language",
+                    "jsl"
+                ],
+                "extensions": [
+                    ".jsl"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "jsl",
+                "scopeName": "source.jsl",
+                "path": "./syntaxes/jsl.tmLanguage.json"
+            }
+        ]
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.34",
+        "@types/vscode": "^1.67.0",
+        "typescript": "^4.6.4",
+        "@vscode/test-electron": "^2.1.3",
+        "vscode-test": "^1.5.2"
+    },
+    "dependencies": {
+        "vsce": "^2.7.0",
+        "vscode-languageclient": "^8.0.1"
+    },
+    "scripts": {
+        "prepublish": "tsc -p ./src",
+        "compile": "tsc -p ./src",
+        "watch": "tsc -w -p ./src",
+        "update-vscode": "node ./node_modules/vscode/bin/install",
+        "vsce": "vsce"
     }
 }

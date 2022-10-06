@@ -44,7 +44,7 @@
         <maven.compiler.target>11</maven.compiler.target>
 
         <!-- Model versions -->
-        <judo-meta-jsl-version>1.0.1.20221006_004450_0d52f746_develop</judo-meta-jsl-version>
+        <judo-meta-jsl-version>1.0.1.20221006_173518_8909ebbc_develop</judo-meta-jsl-version>
 
     </properties>
 

@@ -228,12 +228,6 @@
 					<key>name</key>
 					<string>storage.type.function.jsl</string>
 				</dict>
-				<dict>
-					<key>match</key>
-					<string>\b(required)\b</string>
-					<key>name</key>
-					<string>keyword.control.jsl</string>
-				</dict>
 			</array>
 		</dict>
 		<key>lambda-expression</key>
@@ -304,7 +298,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(entity)(\s+abstract)?\s+(\w*)(\s+(extends)\s+(\w+)(\s*,\s*(\w+))*)?\s*</string>
+					<string>(entity)(\s+abstract)?\s+(\w*)(\s+(extends)\s+(\w+)(\s*,\s*(\w+))*)?\s*{</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>

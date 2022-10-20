@@ -188,21 +188,65 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>\b(boolean|binary|string|numeric|date|time|timestamp)\b</string>
-					<key>name</key>
-					<string>storage.types.primitives.jsl</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>\b(enum|entity)\b</string>
+					<string>\b(enum)\b</string>
 					<key>name</key>
 					<string>storage.types.class.jsl</string>
 				</dict>
 				<dict>
-					<key>match</key>
-					<string>\btype\b</string>
+					<key>begin</key>
+					<string>\s*(type )\s*</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.types.class.jsl</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>;</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.jsl</string>
+						</dict>
+					</dict>
+
 					<key>name</key>
-					<string>keyword.control.typeDeclaration.jsl</string>
+					<string>meta.type.typeDeclaration.jsl</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#primitives</string>
+						</dict>
+					</array>
+
+				</dict>
+			</array>
+		</dict>
+		<key>primitives</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\b(boolean|binary|string|numeric|date|time|timestamp)\b\s+(\w+)?</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.types.primitives.jsl</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>support.type.typeName.jsl</string>
+						</dict>
+					</dict>
 				</dict>
 			</array>
 		</dict>
@@ -212,9 +256,31 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>\b(field|required|identifier|relation|opposite|opposite-add|derived|query)\b</string>
+					<string>\b(field|identifier|relation|derived|query)\b(\s+required)?\s+(\w+)?</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.jsl<</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.jsl</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>support.type.typeName.jsl</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(opposite|opposite-add)\b</string>
 					<key>name</key>
-					<string>keyword.control.jsl</string>
+					<string>keyword.control.jsl<</string>
 				</dict>
 			</array>
 		</dict>
@@ -298,7 +364,8 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(entity)(\s+abstract)?\s+(\w*)(\s+(extends)\s+(\w+)(\s*,\s*(\w+))*)?\s*{</string>
+					<string>(entity)(\s+abstract)?\s+(\w+)\s*</string>
+					<!--entity)(\s+abstract)?\s+(\w+)(\s+(extends)\s+(\w+)(\s*,\s*(\w+))*)?\s* -->
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -316,54 +383,115 @@
 							<key>name</key>
 							<string>support.class.entityName.jsl</string>
 						</dict>
-						<key>5</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.control.jsl</string>
-						</dict>
-						<key>6</key>
-						<dict>
-							<key>name</key>
-							<string>support.class.entityParent.jsl</string>
-						</dict>
-						<key>8</key>
-						<dict>
-							<key>name</key>
-							<string>support.class.entityParent.jsl</string>
-						</dict>
-
 					</dict>
 					<key>name</key>
-					<string>punctuation.definition.entity.jsl</string>
+					<string>meta.entity.jsl</string>
 					<key>end</key>
-					<string>\}</string>
+					<string>}</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.entity.end.jsl</string>
+						</dict>
+					</dict>
 					<key>patterns</key>
 					<array>
+					<dict>
+						<key>begin</key>
+						<string>extends</string>
+						<key>beginCaptures</key>
 						<dict>
-							<key>include</key>
-							<string>#comments</string>
+							<key>0</key>
+							<dict>
+								<key>name</key>
+								<string>storage.modifier.extends.jsl</string>
+							</dict>
 						</dict>
-						<dict>
-							<key>include</key>
-							<string>#keywords</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#types</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#modifiersInEntity</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#lambda-expression</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#literals</string>
-						</dict>
+						<key>end</key>
+						<string>(?={)</string>
+						<key>name</key>
+						<string>meta.definition.entity.inherited.classes.end.jsl</string>
+						<key>patterns</key>
+						<array>
+							<dict>
+								<key>include</key>
+								<string>#entity-inheretend</string>
+							</dict>
+							<dict>
+								<key>include</key>
+								<string>#comments</string>
+							</dict>
+						</array>
+					</dict>
+					<dict>
+						<key>begin</key>
+						<string>{</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.section.entity.begin.jsl</string>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>(?=})</string>
+							<key>name</key>
+							<string>meta.enitity.body.java</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#entity-body</string>
+								</dict>
+							</array>
+					</dict>
 					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>entity-body</key>	
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comments</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#keywords</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#types</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#modifiersInEntity</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#lambda-expression</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literals</string>
+				</dict>
+			</array>
+		</dict>
+		<key>#entity-inheretend</key>	
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string> \w+ </string>
+					<key>name</key>
+					<string>support.class.entityName.jsl<</string>
+
 				</dict>
 			</array>
 		</dict>

@@ -1,0 +1,219 @@
+//Refenrece for the jsl.tmLanguage
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "myscript",
+    "patterns": [
+      {
+        "include": "#nestedtermsexternal"
+      },
+      {
+        "include": "#nestedterms"
+      },
+      {
+        "include": "#terms"
+      },
+      {
+        "include": "#punctuations"
+      },
+      {
+        "include": "#strings"
+      },
+      {
+        "include": "#numbers"
+      },
+      {
+        "include": "#codes"
+      },
+      {
+        "include": "#comments"
+      }
+    ],
+    "repository": {
+      "comments": {
+        "patterns": [
+          {
+            "name": "comment.line.number-sign.myscript",
+            "match": "\\# .+"
+          }
+        ]
+      },
+      "codes": {
+        "patterns": [
+          {
+            "name": "constant.character.escape.language.myscript",
+            "match": "\\#\\w+"
+          }
+        ]
+      },
+      "nestedtermsexternal": {
+        "patterns": [
+          {
+            "name": "entity.language.myscript",
+            "begin": "([a-z][a-z0-9]*(?:-[a-z0-9]+)*) ",
+            "beginCaptures": {
+              "1": {
+                "name": "string.quoted.double.myscript"
+              }
+            },
+            "end": "[,\n]",
+            "patterns": [
+              {
+                "include": "#terms"
+              },
+              {
+                "include": "#strings"
+              },
+              {
+                "include": "#numbers"
+              },
+              {
+                "include": "#codes"
+              },
+              {
+                "include": "#comments"
+              }
+            ]
+          }
+        ]
+      },
+      "nestedterms": {
+        "patterns": [
+          {
+            "name": "term.language.myscript",
+            "begin": "([a-z][a-z0-9]*(?:-[a-z0-9]+)*)(\\()",
+            "beginCaptures": {
+              "1": {
+                "name": "string.quoted.double.myscript"
+              },
+              "2": {
+                "name": "string.quoted.double.myscript"
+              }
+            },
+            "end": "\\)",
+            "endCaptures": {
+              "0": {
+                "name": "string.quoted.double.myscript"
+              }
+            },
+            "patterns": [
+              {
+                "include": "#comments"
+              },
+              {
+                "include": "#terms"
+              },
+              {
+                "include": "#strings"
+              },
+              {
+                "include": "#numbers"
+              },
+              {
+                "include": "#codes"
+              }
+            ]
+          }
+        ]
+      },
+      "terms": {
+        "patterns": [
+          {
+            "name": "term.language.myscript",
+            "match": "([a-z][a-z0-9]*(?:-[a-z0-9]+)*)"
+          }
+        ]
+      },
+      "numbers": {
+        "patterns": [
+          {
+            "name": "constant.numeric.integer.myscript",
+            "match": "\\d+"
+          },
+          {
+            "name": "constant.numeric.decimal.myscript",
+            "match": "\\d+\\.\\d+"
+          }
+        ]
+      },
+      "punctuations": {
+        "patterns": [
+          {
+            "name": "punctuation.separator.parameter.myscript",
+            "match": ","
+          },
+          {
+            "name": "punctuation.curly.open.myscript",
+            "match": "\\{"
+          },
+          {
+            "name": "punctuation.curly.close.myscript",
+            "match": "\\}"
+          }
+        ]
+      },
+      "strings": {
+        "name": "template.myscript",
+        "begin": "\\<",
+        "beginCaptures": {
+          "0": {
+            "name": "entity.name.type.myscript"
+          }
+        },
+        "end": "\\>",
+        "endCaptures": {
+          "0": {
+            "name": "entity.name.type.myscript"
+          }
+        },
+        "patterns": [
+          {
+            "include": "#codes"
+          },
+          {
+            "name": "punctuation.term.myscript",
+            "begin": "\\{",
+            "beginCaptures": {
+              "0": {
+                "name": "entity.name.type.myscript"
+              }
+            },
+            "end": "\\}",
+            "endCaptures": {
+              "0": {
+                "name": "entity.name.type.myscript"
+              }
+            },
+            "patterns": [
+              {
+                "include": "#nestedterms"
+              },
+              {
+                "include": "#terms"
+              },
+              {
+                "include": "#numbers"
+              },
+              {
+                "include": "#strings"
+              },
+              {
+                "include": "#punctuations"
+              },
+              {
+                "include": "#codes"
+              }
+            ]
+          },
+          {
+            "name": "entity.name.type",
+            "match": "[^\\#\\{\\}\\>]+"
+          },
+          {
+            "name": "entity.name.type",
+            "match": "\\#"
+          }
+        ]
+      }
+    },
+    "scopeName": "source.jsl"
+  }

@@ -41,7 +41,7 @@
             {
                 "language": "jsl",
                 "scopeName": "source.jsl",
-                "path": "./syntaxes/jsl.tmLanguage.json"
+                "path": "./syntaxes/jsl.tmLanguage"
             }
         ]
     },

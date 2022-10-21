@@ -482,16 +482,35 @@
 				</dict>
 			</array>
 		</dict>
-		<key>#entity-inheretend</key>	
+		<key>entity-inheretend</key>	
 		<dict>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>match</key>
-					<string> \w+ </string>
-					<key>name</key>
-					<string>support.class.entityName.jsl<</string>
-
+					<string>(\w+)\s*\,</string>
+					<key>captures</key>
+						<dict>
+							<key>1</key>
+							<dict>
+								<key>name</key>
+								<string>support.class.entityNameMore.jsl</string>
+							</dict>
+						</dict>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\w+</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>support.class.entityName.jsl</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?={)</string>
 				</dict>
 			</array>
 		</dict>

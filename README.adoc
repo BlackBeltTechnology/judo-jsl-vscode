@@ -8,6 +8,22 @@ The JSL VSCode plugin provides smart editing features for JUDO Specific Language
 
 _(The frontend plugin build is part of the maven build as well)_
 
+== Install
+
+We haven't yet an official extension in VS Code Marketplace (in progress). You must have manually adding it. This link:https://github.com/BlackBeltTechnology/judo-jsl-vscode/releases[link] download from the last release in *Assests* the _jsl-language.vsix_ file.
+
+### Follow the instruction to add the extension:
+
+1. Click the Extentions panel.
++
+image::doc/images/extentions_panel_open.png["Click the Extention panel"]
+2. Click the three dot and select Install from VSIX... . Select the jsl-language.vsix file from the folder when you downloaded.
++
+image::doc/images/extentions_panel_open_install_vsix.png["Select the Instal from VSIX..."]
+3. Well done. The JUDO JSL plugin is installed.
++
+image::doc/images/extentions_panel_installed.png["The installed plugin"]
+
 == Context
 
 This project is a building block of the https://github.com/BlackBeltTechnology/judo-community[judo-community] aggregator

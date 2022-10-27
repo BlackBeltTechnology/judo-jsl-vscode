@@ -183,6 +183,7 @@ jobs:
           body: ${{steps.create_changelog.outputs.changelog}}
           draft: false
           prerelease: true
+          artifacts: jsl-language.vsix
 
       - name: 🎤 Create message
         id: message

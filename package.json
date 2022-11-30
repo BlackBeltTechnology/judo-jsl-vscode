@@ -2,7 +2,7 @@
     "name": "judo-jsl-extension",
     "displayName": "JUDO JSL",
     "description": "JUDO Specification Language Extension (JSL)",
-    "version": "1.0.0",
+    "version": "v1.0.3",
     "publisher": "BlackBelt Technology",
     "icon": "images/judo-logo.png",
     "license": "EPL-1.0",

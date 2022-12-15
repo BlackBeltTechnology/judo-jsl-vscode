@@ -33,6 +33,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#model</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#comments</string>
 				</dict>
 				<dict>
@@ -58,85 +62,6 @@
 				<dict>
 					<key>include</key>
 					<string>#terminal-signal</string>				
-				</dict>
-			</array>
-		</dict>
-		<key>comments</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>captures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.comment.jsl</string>
-						</dict>
-					</dict>
-					<key>match</key>
-					<string>/\*\*/</string>
-					<key>name</key>
-					<string>comment.block.empty.jsl</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#comments-inline</string>
-				</dict>
-			</array>
-		</dict>
-		<key>comments-inline</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>/\*</string>
-					<key>captures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.comment.jsl</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>\*/</string>
-					<key>name</key>
-					<string>comment.block.jsl</string>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>(^[ \t]+)?(?=//)</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.whitespace.comment.leading.jsl</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>(?!\G)</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>begin</key>
-							<string>//</string>
-							<key>beginCaptures</key>
-							<dict>
-								<key>0</key>
-								<dict>
-									<key>name</key>
-									<string>punctuation.definition.comment.jsl</string>
-								</dict>
-							</dict>
-							<key>end</key>
-							<string>\n</string>
-							<key>name</key>
-							<string>comment.line.double-slash.jsl</string>
-						</dict>
-					</array>
 				</dict>
 			</array>
 		</dict>
@@ -233,6 +158,82 @@
 							<string>#parameters</string>
 						</dict>						
 					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>model</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\s*(model )\s*</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.jsl</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>;</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.jsl</string>
+						</dict>
+					</dict>
+
+					<key>name</key>
+					<string>meta.model.modelDeclaration.jsl</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#modelname</string>
+						</dict>					
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>modelname</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>(\w+)(::)</string>
+					<key>captures</key>
+						<dict>
+							<key>1</key>
+							<dict>
+								<key>name</key>
+								<string>entity.name.type.entityNameMore.jsl</string>
+							</dict>
+							<key>2</key>
+							<dict>
+								<key>name</key>
+								<string>keyword.control.jsl</string>
+							</dict>
+						</dict>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\w+</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.type.entityName.jsl</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?=;)</string>
+
 				</dict>
 			</array>
 		</dict>
@@ -668,6 +669,85 @@
 					</dict>
 					<key>end</key>
 					<string>(?={)</string>
+				</dict>
+			</array>
+		</dict>
+		<key>comments</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.jsl</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>/\*\*/</string>
+					<key>name</key>
+					<string>comment.block.empty.jsl</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comments-inline</string>
+				</dict>
+			</array>
+		</dict>
+		<key>comments-inline</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>/\*</string>
+					<key>captures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.jsl</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\*/</string>
+					<key>name</key>
+					<string>comment.block.jsl</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(^[ \t]+)?(?=//)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.whitespace.comment.leading.jsl</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?!\G)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>begin</key>
+							<string>//</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.definition.comment.jsl</string>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>\n</string>
+							<key>name</key>
+							<string>comment.line.double-slash.jsl</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>

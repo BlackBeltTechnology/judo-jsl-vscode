@@ -87,33 +87,39 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(==|!=|&lt;=|&gt;=|&lt;|&gt;)\b</string>
+					<string>;</string>
+					<key>name</key>
+					<string>keyword.control.jsl</string>
+				</dict>
+			</array>
+		</dict>
+		<key>operators</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>==|!=|&lt;=|&gt;=|&lt;|&gt;</string>
 					<key>name</key>
 					<string>keyword.operator.comparison.jsl</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(=)\b</string>
+					<string>=</string>
 					<key>name</key>
 					<string>keyword.operator.assignment.jsl</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(\-|\+|\*|\/|div|mod)\b</string>
+					<string>\-|\+|\*|\/|div|mod</string>
 					<key>name</key>
 					<string>keyword.operator.arithmetic.jsl</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(not|and|or|implies)\b</string>
+					<string>not|and|or|implies</string>
 					<key>name</key>
 					<string>keyword.operator.logical.jsl</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>;</string>
-					<key>name</key>
-					<string>keyword.control.jsl</string>
 				</dict>
 			</array>
 		</dict>
@@ -148,7 +154,6 @@
 							<string>keyword.control.jsl</string>
 						</dict>
 					</dict>
-
 					<key>name</key>
 					<string>meta.type.typeDeclaration.jsl</string>
 					<key>patterns</key>
@@ -210,18 +215,18 @@
 					<key>match</key>
 					<string>(\w+)(::)</string>
 					<key>captures</key>
+					<dict>
+						<key>1</key>
 						<dict>
-							<key>1</key>
-							<dict>
-								<key>name</key>
-								<string>support.class.namespaceName.jsl</string>
-							</dict>
-							<key>2</key>
-							<dict>
-								<key>name</key>
-								<string>keyword.control.jsl</string>
-							</dict>
+							<key>name</key>
+							<string>support.class.namespaceName.jsl</string>
 						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.jsl</string>
+						</dict>
+					</dict>
 				</dict>
 				<dict>
 					<key>begin</key>
@@ -452,10 +457,27 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key>
+					<key>begin</key>
 					<string>=></string>
-					<key>name</key>
-					<string>storage.type.function.arrow.jsl</string>
+						<key>beginCaptures</key>
+						<dict>
+							<key>0</key>
+							<dict>
+								<key>name</key>
+								<string>storage.type.function.arrow.jsl</string>
+							</dict>
+						</dict>	
+						<key>name</key>
+						<string>meta.meta.lambdaExpressionBody.in.jsl.jsl</string>
+						<key>end</key>
+						<string>(?=;)</string>
+						<key>patterns</key>
+						<array>
+							<dict>
+								<key>include</key>
+								<string>#expressions</string>
+							</dict>
+						</array>
 				</dict>
 			</array>
 		</dict>
@@ -524,6 +546,18 @@
 					<string>\b\\b</string>
 					<key>name</key>
 					<string>constant.numeric.integer.decimal.jsl</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\w+\#(\w+)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.enummember</string>
+						</dict>
+					</dict>
 				</dict>
 			</array>
 		</dict>
@@ -743,6 +777,32 @@
 				<dict>
 					<key>include</key>
 					<string>#terminal-signal</string>				
+				</dict>
+			</array>
+		</dict>
+		<key>expressions</key>	
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comments</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#lambda-expression</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literals</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#terminal-signal</string>				
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#operators</string>				
 				</dict>
 			</array>
 		</dict>

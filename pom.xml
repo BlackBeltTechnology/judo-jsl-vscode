@@ -45,7 +45,7 @@
 
         <!-- Model versions -->
         <judo-meta-jsl-version>1.0.3.20221212_173707_223cc2d2_develop</judo-meta-jsl-version>
-        <judo-jsl-tmbundle-jsl-version>1.0.0.20221220_095948_82d05ab3_feature_JNG_4160_Adding_scopes_add_missing_syntaxis</judo-jsl-tmbundle-jsl-version>
+        <judo-jsl-tmbundle-version>1.0.0.20221220_095948_82d05ab3_feature_JNG_4160_Adding_scopes_add_missing_syntaxis</judo-jsl-tmbundle-version>
 
     </properties>
 
@@ -422,7 +422,7 @@
                         <artifactItem>
                             <groupId>hu.blackbelt.judo</groupId>
                             <artifactId>judo-jsl-tmbundle</artifactId>
-                            <version>${judo-jsl-tmbundle-jsl-version}</version>
+                            <version>${judo-jsl-tmbundle-version}</version>
                             <type>jar</type>
                             <overWrite>true</overWrite>
                             <outputDirectory>${basedir}</outputDirectory>

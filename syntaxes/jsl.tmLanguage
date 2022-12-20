@@ -33,6 +33,14 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#model</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#import</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#comments</string>
 				</dict>
 				<dict>
@@ -61,85 +69,6 @@
 				</dict>
 			</array>
 		</dict>
-		<key>comments</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>captures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.comment.jsl</string>
-						</dict>
-					</dict>
-					<key>match</key>
-					<string>/\*\*/</string>
-					<key>name</key>
-					<string>comment.block.empty.jsl</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#comments-inline</string>
-				</dict>
-			</array>
-		</dict>
-		<key>comments-inline</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>/\*</string>
-					<key>captures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.comment.jsl</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>\*/</string>
-					<key>name</key>
-					<string>comment.block.jsl</string>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>(^[ \t]+)?(?=//)</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.whitespace.comment.leading.jsl</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>(?!\G)</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>begin</key>
-							<string>//</string>
-							<key>beginCaptures</key>
-							<dict>
-								<key>0</key>
-								<dict>
-									<key>name</key>
-									<string>punctuation.definition.comment.jsl</string>
-								</dict>
-							</dict>
-							<key>end</key>
-							<string>\n</string>
-							<key>name</key>
-							<string>comment.line.double-slash.jsl</string>
-						</dict>
-					</array>
-				</dict>
-			</array>
-		</dict>
 		<key>keywords</key>
 		<dict>
 			<key>patterns</key>
@@ -158,33 +87,39 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(==|!=|&lt;=|&gt;=|&lt;|&gt;)\b</string>
+					<string>;</string>
+					<key>name</key>
+					<string>keyword.control.jsl</string>
+				</dict>
+			</array>
+		</dict>
+		<key>operators</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>==|!=|&lt;=|&gt;=|&lt;|&gt;</string>
 					<key>name</key>
 					<string>keyword.operator.comparison.jsl</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(=)\b</string>
+					<string>=</string>
 					<key>name</key>
 					<string>keyword.operator.assignment.jsl</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(\-|\+|\*|\/|div|mod)\b</string>
+					<string>\-|\+|\*|\/|div|mod</string>
 					<key>name</key>
 					<string>keyword.operator.arithmetic.jsl</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(not|and|or|implies)\b</string>
+					<string>not|and|or|implies</string>
 					<key>name</key>
 					<string>keyword.operator.logical.jsl</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>;</string>
-					<key>name</key>
-					<string>keyword.control.jsl<!--punctuation.terminator.jsl--></string>
 				</dict>
 			</array>
 		</dict>
@@ -219,7 +154,6 @@
 							<string>keyword.control.jsl</string>
 						</dict>
 					</dict>
-
 					<key>name</key>
 					<string>meta.type.typeDeclaration.jsl</string>
 					<key>patterns</key>
@@ -232,6 +166,178 @@
 							<key>include</key>
 							<string>#parameters</string>
 						</dict>						
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>model</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\b(model)\b </string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.jsl</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>;</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.jsl</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>meta.model.modelDeclaration.jsl</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#modelname</string>
+						</dict>					
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>modelname</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>(\w+)(::)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.class.namespaceName.jsl</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.jsl</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\w+</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>support.class.namespaceName.jsl</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?=;)</string>
+				</dict>
+			</array>
+		</dict>
+		<key>import</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\b(import)\b </string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.jsl</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>;</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.jsl</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>meta.import.importLibreries.jsl</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>(\w+)(::)</string>
+							<key>captures</key>
+								<dict>
+									<key>1</key>
+									<dict>
+										<key>name</key>
+										<string>support.class.namespaceName.jsl</string>
+									</dict>
+									<key>2</key>
+									<dict>
+										<key>name</key>
+										<string>keyword.control.jsl</string>
+									</dict>
+								</dict>
+						</dict>
+						<dict>
+							<key>begin</key>
+							<string>\w+</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>support.class.namespaceName.jsl</string>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>(?=;)</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>begin</key>
+									<string>as</string>
+									<key>beginCaptures</key>
+									<dict>
+										<key>0</key>
+										<dict>
+											<key>name</key>
+											<string>keyword.control.jsl</string>
+										</dict>
+									</dict>
+									<key>end</key>
+									<string>(?=;)</string>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>begin</key>
+											<string>\w+</string>
+											<key>beginCaptures</key>
+											<dict>
+												<key>0</key>
+												<dict>
+													<key>name</key>
+													<string>support.variable.alliasName.jsl</string>
+												</dict>
+											</dict>
+											<key>end</key>
+											<string>(?=;)</string>
+										</dict>
+									</array>
+								</dict>
+							</array>
+						</dict>
 					</array>
 				</dict>
 			</array>
@@ -351,10 +457,27 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key>
+					<key>begin</key>
 					<string>=></string>
-					<key>name</key>
-					<string>storage.type.function.arrow.jsl</string>
+						<key>beginCaptures</key>
+						<dict>
+							<key>0</key>
+							<dict>
+								<key>name</key>
+								<string>storage.type.function.arrow.jsl</string>
+							</dict>
+						</dict>	
+						<key>name</key>
+						<string>meta.meta.lambdaExpressionBody.in.jsl.jsl</string>
+						<key>end</key>
+						<string>(?=;)</string>
+						<key>patterns</key>
+						<array>
+							<dict>
+								<key>include</key>
+								<string>#expressions</string>
+							</dict>
+						</array>
 				</dict>
 			</array>
 		</dict>
@@ -417,7 +540,25 @@
 					<string>\"</string>
 					<key>name</key>
 					<string>string.quoted.double.states</string>
-				</dict>	 
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b\\b</string>
+					<key>name</key>
+					<string>constant.numeric.integer.decimal.jsl</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\w+\#(\w+)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.enummember</string>
+						</dict>
+					</dict>
+				</dict>
 			</array>
 		</dict>
 		<key>enum-block</key>
@@ -639,6 +780,32 @@
 				</dict>
 			</array>
 		</dict>
+		<key>expressions</key>	
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comments</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#lambda-expression</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literals</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#terminal-signal</string>				
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#operators</string>				
+				</dict>
+			</array>
+		</dict>
 		<key>entity-inheretend</key>	
 		<dict>
 			<key>patterns</key>
@@ -651,7 +818,7 @@
 							<key>1</key>
 							<dict>
 								<key>name</key>
-								<string>entity.name.type.entityNameMore.jsl</string>
+								<string>entity.other.inherited-class.inheritendEntityName.jsl</string>
 							</dict>
 						</dict>
 				</dict>
@@ -663,11 +830,90 @@
 						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.type.entityName.jsl</string>
+							<string>entity.other.inherited-class.inheritendEntityName.jsl</string>
 						</dict>
 					</dict>
 					<key>end</key>
 					<string>(?={)</string>
+				</dict>
+			</array>
+		</dict>
+		<key>comments</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.jsl</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>/\*\*/</string>
+					<key>name</key>
+					<string>comment.block.empty.jsl</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comments-inline</string>
+				</dict>
+			</array>
+		</dict>
+		<key>comments-inline</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>/\*</string>
+					<key>captures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.jsl</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\*/</string>
+					<key>name</key>
+					<string>comment.block.jsl</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(^[ \t]+)?(?=//)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.whitespace.comment.leading.jsl</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?!\G)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>begin</key>
+							<string>//</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.definition.comment.jsl</string>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>\n</string>
+							<key>name</key>
+							<string>comment.line.double-slash.jsl</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>

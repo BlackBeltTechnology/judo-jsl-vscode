@@ -45,6 +45,7 @@
 
         <!-- Model versions -->
         <judo-meta-jsl-version>1.0.3.20221212_173707_223cc2d2_develop</judo-meta-jsl-version>
+        <judo-jsl-tmbundle-version>1.0.0.20221220_095948_82d05ab3_feature_JNG_4160_Adding_scopes_add_missing_syntaxis</judo-jsl-tmbundle-version>
 
     </properties>
 
@@ -303,26 +304,6 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
-
-
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.3.0</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M5</version>
-                    <configuration>
-                        <argLine>-Dfile.encoding=UTF-8</argLine>
-                        <trimStackTrace>false</trimStackTrace>
-                        <systemPropertyVariables>
-                            <log4j.configuration>${log4j.configuration}</log4j.configuration>
-                        </systemPropertyVariables>
-                    </configuration>
-                </plugin>
-
                 <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
@@ -422,6 +403,33 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-tmbundle</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>hu.blackbelt.judo</groupId>
+                            <artifactId>judo-jsl-tmbundle</artifactId>
+                            <version>${judo-jsl-tmbundle-version}</version>
+                            <type>jar</type>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${basedir}</outputDirectory>
+                            <includes>**/*.tmLanguage</includes>
+                        </artifactItem>
+                    </artifactItems>
+                </configuration>
             </plugin>
         </plugins>
     </build>

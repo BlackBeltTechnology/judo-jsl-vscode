@@ -45,6 +45,7 @@
 
         <!-- Model versions -->
         <judo-meta-jsl-version>1.0.3.20221212_173707_223cc2d2_develop</judo-meta-jsl-version>
+        <judo-tmbundle-jsl-version>1.0.0.20221220_095948_82d05ab3_feature_JNG_4160_Adding_scopes_add_missing_syntaxis</judo-tmbundle-jsl-version>
 
     </properties>
 
@@ -422,6 +423,33 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-tmbundle</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>hu.blackbelt.judo</groupId>
+                            <artifactId>judo-jsl-tmbundle</artifactId>
+                            <version>${judo-tmbundle-jsl-version}</version>
+                            <type>jar</type>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${basedir}</outputDirectory>
+                            <includes>**/*.tmLanguage</includes>
+                        </artifactItem>
+                    </artifactItems>
+                </configuration>
             </plugin>
         </plugins>
     </build>

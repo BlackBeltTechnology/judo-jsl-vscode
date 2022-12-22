@@ -542,6 +542,14 @@
 					<string>string.quoted.double.states</string>
 				</dict>
 				<dict>
+					<key>begin</key>
+					<string>\`</string>
+					<key>end</key>
+					<string>\`</string>
+					<key>name</key>
+					<string>string.quoted.double.states</string>
+				</dict>
+				<dict>
 					<key>match</key>
 					<string>\b\\b</string>
 					<key>name</key>

@@ -44,7 +44,7 @@
         <maven.compiler.target>11</maven.compiler.target>
 
         <!-- Model versions -->
-        <judo-meta-jsl-version>1.0.3.20221228_213201_11e2d517_develop</judo-meta-jsl-version>
+        <judo-meta-jsl-version>1.0.3.20221230_041545_29fd27ef_develop</judo-meta-jsl-version>
         <judo-jsl-tmbundle-version>1.0.0.20221222_161011_8b2568d0_feature_JNG_4247_Backticked_language_elements_are_not_highlighted_correctly_for_JSL</judo-jsl-tmbundle-version>
 
     </properties>

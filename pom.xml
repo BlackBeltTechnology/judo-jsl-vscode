@@ -47,7 +47,6 @@
         <judo-meta-jsl-version>1.0.3.20221212_173707_223cc2d2_develop</judo-meta-jsl-version>
         <judo-jsl-tmbundle-version>1.0.0.20230104_114147_827392ca_feature_JNG_4158_Add_element_declaration_scope_in_entity
         </judo-jsl-tmbundle-version>
-
     </properties>
 
     <url>http://github.com/${project-repositoryId}</url>

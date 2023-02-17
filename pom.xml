@@ -213,7 +213,7 @@
         <dependency>
             <groupId>org.eclipse.lsp4j</groupId>
             <artifactId>org.eclipse.lsp4j.generator</artifactId>
-            <version>0.14.0</version>
+            <version>0.20.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

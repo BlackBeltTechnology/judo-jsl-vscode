@@ -44,7 +44,7 @@
         <maven.compiler.target>11</maven.compiler.target>
 
         <!-- Model versions -->
-        <judo-meta-jsl-version>1.0.3.20230328_153202_96fbefca_develop</judo-meta-jsl-version>
+        <judo-meta-jsl-version>1.0.3.20230329_130916_2b36ccd0_develop</judo-meta-jsl-version>
         <judo-jsl-tmbundle-version>1.0.0.20230110_191738_00a95402_feature_JNG_4158_Add_model_namespace_and_query_paramer_list_highlight</judo-jsl-tmbundle-version>
 
     </properties>

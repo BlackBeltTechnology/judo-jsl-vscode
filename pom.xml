@@ -30,7 +30,7 @@
 
     <properties>
         <revision>1.0.4-SNAPSHOT</revision>
-        <maven>3.8.3</maven>
+        <maven>3.9.4</maven>
 
         <project-shortname>judo-jsl-vscode</project-shortname>
         <project-repositoryId>BlackBeltTechnology/judo-jsl-vscode</project-repositoryId>
@@ -551,7 +551,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>3.2.0</version>
+                        <version>3.4.0</version>
                         <executions>
                             <execution>
                                 <id>attach-checksum-artifacts</id>

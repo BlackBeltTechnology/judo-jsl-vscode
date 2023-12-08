@@ -32,7 +32,7 @@ set APP_HOME=%DIRNAME%..
 @rem Resolve any "." and ".." in APP_HOME to make it shorter.
 for %%i in ("%APP_HOME%") do set APP_HOME=%%~fi
 
-@rem Add default JVM options here. You can also use JAVA_OPTS and JSL_STANDALONE_OPTS to pass JVM options to this script.
+@rem Add default JVM options here. You can also use JAVA_OPTS and JSL_OPTS to pass JVM options to this script.
 set DEFAULT_JVM_OPTS=
 
 @rem Find java.exe
@@ -67,10 +67,10 @@ goto fail
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\hu.blackbelt.judo.meta.jsl.ide.common.jar;%APP_HOME%\lib\hu.blackbelt.judo.meta.jsl.model.jar;%APP_HOME%\lib\hu.blackbelt.judo.meta.jsl.server.embedded.jar;%APP_HOME%\lib\org.eclipse.xtext.ide.jar;%APP_HOME%\lib\org.eclipse.xtext.jar;%APP_HOME%\lib\org.eclipse.xtext.util.jar;%APP_HOME%\lib\guice.jar;%APP_HOME%\lib\aopalliance.jar;%APP_HOME%\lib\org.eclipse.lsp4j.jar;%APP_HOME%\lib\org.eclipse.lsp4j.generator.jar;%APP_HOME%\lib\org.eclipse.xtend.lib.jar;%APP_HOME%\lib\org.eclipse.xtend.lib.macro.jar;%APP_HOME%\lib\org.eclipse.xtext.xbase.lib.jar;%APP_HOME%\lib\guava.jar;%APP_HOME%\lib\jsr305.jar;%APP_HOME%\lib\error_prone_annotations.jar;%APP_HOME%\lib\reload4j.jar;%APP_HOME%\lib\antlr-runtime.jar;%APP_HOME%\lib\org.eclipse.emf.ecore.change.jar;%APP_HOME%\lib\org.eclipse.emf.ecore.xmi.jar;%APP_HOME%\lib\org.eclipse.emf.ecore.jar;%APP_HOME%\lib\org.eclipse.emf.common.jar;%APP_HOME%\lib\org.eclipse.lsp4j.jsonrpc.jar;%APP_HOME%\lib\org.eclipse.equinox.common.jar;%APP_HOME%\lib\org.eclipse.osgi.jar;%APP_HOME%\lib\javax.inject.jar;%APP_HOME%\lib\gson.jar;%APP_HOME%\lib\failureaccess.jar;%APP_HOME%\lib\listenablefuture.jar;%APP_HOME%\lib\checker-qual.jar;%APP_HOME%\lib\j2objc-annotations.jar;%APP_HOME%\lib\commons-text.jar;%APP_HOME%\lib\commons-lang3.jar
+set CLASSPATH=%APP_HOME%\lib\hu.blackbelt.judo.meta.jsl.server.embedded-ls.jar
 
 @rem Execute jsl-standalone
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %JSL_STANDALONE_OPTS%  -classpath "%CLASSPATH%" org.eclipse.xtext.ide.server.ServerLauncher %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %JSL_OPTS% -classpath "%CLASSPATH%" org.eclipse.xtext.ide.server.ServerLauncher %*
 
 :end
 @rem End local scope for the variables with windows NT shell

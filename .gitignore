@@ -7,3 +7,4 @@ target/**
 .flattened-pom.xml
 .vscode/settings.json
 syntaxes/jsl.tmLanguage
+src-gen

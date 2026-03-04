@@ -1,0 +1,39 @@
+# JUDO JSL VS Code Extension
+
+> A VS Code extension for the JUDO Specification Language (JSL) that bundles an embedded Java-based language server providing code completion, diagnostics, and symbol lookup via LSP.
+
+Key facts:
+- TypeScript 4.6 extension host + Java 21 language server (LSP over stdio)
+- Build: Maven 3.9.4+ with frontend-maven-plugin for Node.js/npm/vsce toolchain
+- Single-module project — no Maven submodules
+- Key dependency: vscode-languageclient 8.0.1
+- Language server: `hu.blackbelt.judo.meta.jsl.server.embedded` (bundled JARs, not compiled here)
+- TextMate grammar sourced from `judo-jsl-tmbundle` dependency
+- Packaged as `.vsix` for manual installation (not on VS Code Marketplace)
+- License: Eclipse Public License 2.0
+
+## Docs
+
+- [README.md](README.md): Project overview, architecture diagrams, installation, and development guide
+- [AGENTS.md](AGENTS.md): Comprehensive developer reference — directory structure, build commands, technology stack, and git workflow
+- [CONTRIBUTING.md](CONTRIBUTING.md): Contribution guidelines and build instructions
+- [.github/CIFLOW.md](.github/CIFLOW.md): Detailed CI/CD workflow documentation with diagrams
+
+## Source
+
+- [src/extension.ts](src/extension.ts): Extension entry point — creates LanguageClient, spawns Java language server, configures LSP
+- [src/jsl/bin/jsl-standalone](src/jsl/bin/jsl-standalone): POSIX launcher script for the embedded Java language server
+- [src/jsl/bin/jsl-standalone.bat](src/jsl/bin/jsl-standalone.bat): Windows launcher script for the language server
+
+## Configuration
+
+- [package.json](package.json): VS Code extension manifest — activation events, language contributions, npm scripts
+- [pom.xml](pom.xml): Maven build configuration — dependency management, frontend-maven-plugin, profiles, version properties
+- [src/tsconfig.json](src/tsconfig.json): TypeScript compiler config (ES6, CommonJS, output to ../out)
+- [language-configuration.json](language-configuration.json): JSL language rules — bracket pairs, comment syntax, auto-closing pairs
+
+## Optional
+
+- [.github/workflows/build.yml](.github/workflows/build.yml): Main CI pipeline — build, test, deploy, tag, release
+- [.vscode/launch.json](.vscode/launch.json): Debug configuration for launching extension in a new VS Code window
+- [LICENSE.txt](LICENSE.txt): Eclipse Public License 2.0 full text

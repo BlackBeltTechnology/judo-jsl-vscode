@@ -34,7 +34,7 @@ Key facts:
 
 ## Depends on
 
-- [judo-meta-jsl](../../models/judo-meta-jsl): models/judo-meta-jsl
+- [judo-meta-jsl](../../models/judo-meta-jsl): JSL language toolchain — grammar, parser, validator, code generator, and LSP servers
 
 ## Optional
 

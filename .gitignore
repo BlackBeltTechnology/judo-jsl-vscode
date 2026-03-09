@@ -8,3 +8,8 @@ target/**
 .vscode/settings.json
 syntaxes/jsl.tmLanguage
 src-gen
+.claude/commands/opsx
+.claude/skills/openspec-*.md
+.gemini
+.opencode
+.agent
